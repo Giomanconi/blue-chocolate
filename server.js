@@ -3,10 +3,14 @@ const db = require('./config/connection');
 const PORT = process.env.PORT || 8080;
 const app = express();
 
-//Test DB
+/*Test DB*/
 db.authenticate()
 	.then(() => console.log('Database connected...'))
 	.catch(err => console.log('Error: ' + err));
+/*********/
+
+//routes
+app.use('/agenda', require('./routes/AgendaRoute'));
 
 
 

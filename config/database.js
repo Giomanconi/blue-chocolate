@@ -2,7 +2,7 @@ const Sequelize = require('sequelize');
 
 
 // Create connection to database
-module.exports = new Sequelize('GestionSanatorial', 'conexion', 'conexion', {
+module.exports = new Sequelize('SistemaTurnos', 'conexion', 'conexion', {
   host: 'localhost',
   dialect: 'mssql',
 

@@ -1,5 +1,5 @@
 const express = require('express');
-const db = require('./config/connection');
+const db = require('./config/database');
 const PORT = process.env.PORT || 8080;
 const app = express();
 
@@ -9,13 +9,11 @@ db.authenticate()
 	.catch(err => console.log('Error: ' + err));
 /*********/
 
-//routes
-app.use('/agenda', require('./routes/AgendaRoute'));
-
-
-
 app.get('/', (req, res) => res.send('INDEX'));
 
+
+//Agenda Routes
+app.use('/agendas', require('./routes/agenda'));
 
 
 app.listen(PORT, function () {

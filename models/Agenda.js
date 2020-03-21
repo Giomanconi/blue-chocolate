@@ -1,25 +1,22 @@
 const Sequelize = require('sequelize');
-const db = require('../config/connection');
+const db = require('../config/database');
+const Prestador = require('./Prestador');
+const EstadoAgenda = require('./EstadoAgenda');
 
 const Agenda = db.define('Agenda', {
-    AgendaTurnoId: {
+    AgendaId: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true,
     },
-    FechaDesde: Sequelize.DATE,
-    FechaHasta: Sequelize.DATE,
+    FechaInicio: Sequelize.DATE,
+    FechaFin: Sequelize.DATE,
+    TiempoTurno: Sequelize.INTEGER,
+    SobreTurno: Sequelize.INTEGER,
     PrestadorId: {
         type: Sequelize.INTEGER,
         references: {
             model: Prestador,
-            key: 'id'
-        }
-    },
-    EstablecimientoId: {
-        type: Sequelize.INTEGER,
-        references: {
-            model: Establecimiento,
             key: 'id'
         }
     },
@@ -30,7 +27,8 @@ const Agenda = db.define('Agenda', {
             key: 'id'
         }
     }
-
 });
+
+// Agenda.hasMany(Prestador);
 
 module.exports = Agenda;

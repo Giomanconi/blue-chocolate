@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-const db = require('../config/connection');
+const db = require('../config/database');
 
 const EstadoTurno = db.define('EstadoTurno', {
     EstadoTurnoId: {
@@ -9,6 +9,10 @@ const EstadoTurno = db.define('EstadoTurno', {
     },
     Descripcion: Sequelize.STRING
 
+},
+{
+    timestamps: false,
+    freezeTableName: true
 });
 
 module.exports = EstadoTurno;

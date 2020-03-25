@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-const db = require('../config/connection');
+const db = require('../config/database');
 const Agenda = require('./Agenda');
 
 const HorarioAtencion = db.define('HorarioAtencion', {
@@ -19,6 +19,10 @@ const HorarioAtencion = db.define('HorarioAtencion', {
     HoraInicio: Sequelize.TIME,
     HoraFin: Sequelize.TIME,
 
+},
+{
+    timestamps: false,
+    freezeTableName: true
 });
 
 module.exports = HorarioAtencion;

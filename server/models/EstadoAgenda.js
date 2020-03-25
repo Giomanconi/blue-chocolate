@@ -9,6 +9,10 @@ const EstadoAgenda = db.define('EstadoAgenda', {
     },
     Descripcion: Sequelize.STRING
 
+},
+{
+    timestamps: false,
+    freezeTableName: true
 });
 
 module.exports = EstadoAgenda;

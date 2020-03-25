@@ -9,6 +9,10 @@ const Prestador = db.define('Prestador', {
     },
     RazonSocial: Sequelize.STRING
 
+},
+{
+    timestamps: false,
+    freezeTableName: true
 });
 
 module.exports = Prestador;

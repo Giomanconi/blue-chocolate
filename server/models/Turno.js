@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-const db = require('../config/connection');
+const db = require('../config/database');
 const HorarioAtencion = require('./HorarioAtencion');
 const Prestador = require('./Prestador');
 const Paciente = require('./Paciente');
@@ -42,6 +42,10 @@ const Turno = db.define('Turno', {
         }
     }
 
+},
+{
+    timestamps: false,
+    freezeTableName: true
 });
 
 module.exports = Turno;

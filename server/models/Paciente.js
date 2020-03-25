@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-const db = require('../config/connection');
+const db = require('../config/database');
 
 const Paciente = db.define('Paciente', {
     PacienteId: {
@@ -9,6 +9,10 @@ const Paciente = db.define('Paciente', {
     },
     Descripcion: Sequelize.STRING
 
+},
+{
+    timestamps: false,
+    freezeTableName: true
 });
 
 module.exports = Paciente;

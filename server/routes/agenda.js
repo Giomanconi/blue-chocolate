@@ -5,11 +5,11 @@ const Agenda = require('../models/Agenda');
 router.get('/', function (req, res) {
 
     Agenda.findAll()
-        .then(agenda => {
-            console.log(agenda)
+        .then(p => {
+            console.log(p)
             res.sendStatus(200);
         })
-        .catch(err => console.log(err))
+        .catch(err => console.log('Error:::::::::' + err + '-----------------------------'))
 
 });
 

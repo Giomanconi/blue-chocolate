@@ -14,5 +14,6 @@
   "bugs": {
     "url": "https://github.com/Giomanconi/blue-chocolate/issues"
   },
-  "homepage": "https://github.com/Giomanconi/blue-chocolate#readme"
+  "homepage": "https://github.com/Giomanconi/blue-chocolate#readme",
+  "dependencies": {}
 }

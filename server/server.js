@@ -1,5 +1,6 @@
 const express = require('express');
 const db = require('./config/database');
+var bodyParser = require('body-parser')
 const PORT = process.env.PORT || 8080;
 const app = express();
 
@@ -14,6 +15,8 @@ app.get('/', (req, res) => res.send('INDEX'));
 
 //Agenda Routes
 app.use('/agendas', require('./routes/agenda'));
+app.use('/horarios', require('./routes/horarioAtencion'));
+app.use('/turnos', require('./routes/turno'));
 
 
 app.listen(PORT, function () {

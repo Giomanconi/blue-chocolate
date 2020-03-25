@@ -5,8 +5,8 @@ const Turno = require('../models/Turno');
 router.get('/', function (req, res) {
 
     Turno.findAll()
-        .then(Turno => {
-            console.log(Turno)
+        .then(p => {
+            console.log(p)
             res.sendStatus(200);
         })
         .catch(err => console.log(err))

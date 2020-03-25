@@ -5,8 +5,8 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter as Router } from "react-router-dom";
 // import 'bootstrap/dist/css/bootstrap.min.css';
-import './assets/css/mint.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
+import './assets/css/mint.css';
 
 ReactDOM.render(
     <Router>

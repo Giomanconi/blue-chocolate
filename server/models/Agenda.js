@@ -27,6 +27,10 @@ const Agenda = db.define('Agenda', {
             key: 'id'
         }
     }
+},
+{
+    timestamps: false,
+    freezeTableName: true
 });
 
 // Agenda.hasMany(Prestador);

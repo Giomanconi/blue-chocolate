@@ -1,12 +1,15 @@
 import React from 'react';
-import FormAgenda from '../components/FormAgenda'
+import Agenda from './Agenda';
+
 
 export default function Home() {
     return (
         <>
-            <section className="container">
-                <FormAgenda />
-            </section>
+           <section className="container">
+
+            <Agenda />
+
+           </section>
         </>
     );
 }

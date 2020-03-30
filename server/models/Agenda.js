@@ -10,7 +10,6 @@ const Agenda = db.define('Agenda', {
         autoIncrement: true,
     },
     FechaInicio: Sequelize.DATE,
-    FechaFin: Sequelize.DATE,
     TiempoTurno: Sequelize.INTEGER,
     SobreTurno: Sequelize.INTEGER,
     PrestadorId: {

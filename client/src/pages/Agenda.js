@@ -1,10 +1,15 @@
 import React from 'react';
-import DetalleAgendas from './DetalleAgendas';
+import FormAgenda from '../components/FormAgenda'
+import VistaAgenda from '../components/VistaAgenda'
 
 export default function Agenda() {
     return (
         <>
-            <DetalleAgendas/>
+
+            <VistaAgenda />
+
+            <FormAgenda />
+
         </>
     );
 }

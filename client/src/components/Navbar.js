@@ -15,14 +15,14 @@ export default function Navbar() {
                             {/* <li className="nav-item active">
                                 <a className="nav-link" href="#top">Home <span className="sr-only">(current)</span></a>
                             </li> */}
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#top" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <li className="nav-item dropdown">
+                                <a className="nav-link dropdown-toggle" href="#top" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Herramientas
                                 </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                    <a class="dropdown-item" href="#top">Nueva Agenda</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#top">Cambiar Horarios de Atencion</a>
+                                <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                    <a className="dropdown-item" href="#top">Nueva Agenda</a>
+                                    <div className="dropdown-divider"></div>
+                                    <a className="dropdown-item" href="#top">Cambiar Horarios de Atencion</a>
                                 </div>
                             </li>
                         </ul>

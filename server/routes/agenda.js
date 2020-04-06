@@ -1,16 +1,19 @@
 const express = require('express');
-const sequelize = require('sequelize')
 const router = express.Router();
-const Agenda = require('../models/Agenda');
-const db = require('../config/database')
+const models = require('../models');
+const { QueryTypes } = require('sequelize');
 
 //get all agendas
 router.get('/', async function (req, res) {
-
     try {
-        const agenda = await Agenda.findAll({ raw: true });
-        // console.log(paciente.every(p => p instanceof Paciente)); // true
-        res.status(200).send(agenda)
+        const prestador = await models.sequelize.query(
+            'select pr.RazonSocial, ag.FechaInicio, ag.FechaFin, ag.Activo, ag.AgendaId from Agenda as ag inner join Prestador as pr on  ag.PrestadorId = pr.PrestadorId order by pr.RazonSocial, ag.FechaInicio',
+            {
+                type: QueryTypes.SELECT
+            }
+        );
+        
+        res.status(200).send(prestador)
 
     } catch (e) {
         console.log('Error getting agendas: ' + e)
@@ -19,20 +22,18 @@ router.get('/', async function (req, res) {
 
 // Add new agenda
 router.post('/add', async function (req, res) {
-
-    let { FechaInicio, TiempoTurno, SobreTurno, PrestadorId } = await req.body;
-    console.log("=======================================================" + req.body)
+    let { fechaInicio, tiempoTurno, sobreturno, prestadorId } = await req.body;
+    console.log("======================== Agenda Add ===============================")
     // let errors = [];
-
-    const newAgenda = await Agenda.create({
-        FechaInicio,
-        TiempoTurno,
-        SobreTurno,
-        PrestadorId,
+    const newAgenda = await models.Agenda.create({
+        fechaInicio,
+        tiempoTurno,
+        sobreturno,
+        prestadorId,
+        activo: 1
     })
-
     res.send(newAgenda)
+    console.log("======================== Agenda Add ===============================")
 });
-
 
 module.exports = router;

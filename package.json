@@ -10,8 +10,11 @@
   "license": "MIT",
   "scripts": {
     "server": "cd server && npm start",
+    "server-install": "cd server && npm install",
     "client": "cd client && npm start",
-    "start": "concurrently \"npm run server\" \"npm run client\""
+    "client-install": "cd client && npm install",
+    "start": "concurrently \"npm run server\" \"npm run client\"",
+    "dev-install": "concurrently \"npm run server-install\" \"npm run client-install\""
   },
   "bugs": {
     "url": "https://github.com/Giomanconi/blue-chocolate/issues"

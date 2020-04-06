@@ -1,0 +1,14 @@
+
+modificar la estructura de carpetas y archivos del servidor para mas seguridad.
+{ crear carpetas de controladores, servicios, utils, middlewares, public(img, css) }
+
+
+horario de atencion va adentro del formulario para agregar agenda.
+
+
+ir agregando comentarios a las cosas explicando que hace.
+
+
+
+
+181.35.121.34

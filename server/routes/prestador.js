@@ -1,12 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const Prestador = require('../models/Prestador');
+const models = require('../models');
 
 //get all prestadores
 router.get('/', async function (req, res) {
-
     try {
-        const prestador = await Prestador.findAll({raw: true});
+        const prestador = await models.Prestador.findAll({raw: true});
         // console.log(prestador.every(p => p instanceof Paciente)); // true
         res.status(200).send(prestador)
         

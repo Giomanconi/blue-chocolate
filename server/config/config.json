@@ -1,0 +1,10 @@
+{
+  "development": {
+    "username": "conexion",
+    "password": "conexion",
+    "database": "SistemaTurnos",
+    "host": "localhost",
+    "dialect": "mssql",
+    "operatorsAliases": 0
+  }
+}

@@ -1,37 +1,62 @@
-const Sequelize = require('sequelize');
-const db = require('../config/database');
-const Prestador = require('./Prestador');
-const EstadoAgenda = require('./EstadoAgenda');
+'use strict';
 
-const Agenda = db.define('Agenda', {
-    AgendaId: {
-        type: Sequelize.INTEGER,
-        primaryKey: true,
-        autoIncrement: true,
-    },
-    FechaInicio: Sequelize.DATE,
-    TiempoTurno: Sequelize.INTEGER,
-    SobreTurno: Sequelize.INTEGER,
-    PrestadorId: {
-        type: Sequelize.INTEGER,
-        references: {
-            model: Prestador,
-            key: 'id'
+module.exports = (sequelize, DataTypes) => {
+    const Agenda = sequelize.define('Agenda', {
+        agendaId: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            primaryKey: true,
+            autoIncrement: true,
+            field: 'AgendaId'
+        },
+        fechaInicio: {
+            type: DataTypes.DATEONLY,
+            allowNull: true,
+            field: 'FechaInicio'
+        },
+        fechaFin: {
+            type: DataTypes.DATEONLY,
+            allowNull: true,
+            field: 'FechaFin'
+        },
+        tiempoTurno: {
+            type: DataTypes.INTEGER,
+            allowNull: true,
+            field: 'TiempoTurno'
+        },
+        sobreturno: {
+            type: DataTypes.INTEGER,
+            allowNull: true,
+            field: 'Sobreturno'
+        },
+        prestadorId: {
+            type: DataTypes.INTEGER,
+            allowNull: true,
+            references: {
+                model: 'Prestador',
+                key: 'PrestadorId'
+            },
+            field: 'PrestadorId'
+        },
+        activo: {
+            type: DataTypes.BOOLEAN,
+            allowNull: true,
+            field: 'Activo'
         }
-    },
-    EstadoAgendaId: {
-        type: Sequelize.INTEGER,
-        references: {
-            model: EstadoAgenda,
-            key: 'id'
-        }
-    }
-},
-{
-    timestamps: false,
-    freezeTableName: true
-});
+    }, {
+        tableName: 'Agenda',
+        timestamps: false,
+        freezeTableName: true
+    });
 
-// Agenda.hasMany(Prestador);
+    Agenda.asociate = function (model) {
+        model.Agenda.belongsTo(model.Prestador, {
+            foreignKey: 'PrestadorId'
+        });
+        model.Agenda.hasMany(model.HorarioAtencion, {
+            foreignKey: 'AgendaId'
+        });
+    };
 
-module.exports = Agenda;
+    return Agenda;
+};

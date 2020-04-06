@@ -1,28 +1,55 @@
-const Sequelize = require('sequelize');
-const db = require('../config/database');
-const Agenda = require('./Agenda');
+'use strict';
 
-const HorarioAtencion = db.define('HorarioAtencion', {
-    HorarioAtencionId: {
-        type: Sequelize.INTEGER,
-        primaryKey: true,
-        autoIncrement: true,
-    },
-    AgendaId: {
-        type: Sequelize.INTEGER,
-        references: {
-            model: Agenda,
-            key: 'id'
+module.exports = (sequelize, DataTypes) => {
+    var HorarioAtencion = sequelize.define('HorarioAtencion', {
+        horarioAtencionId: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            primaryKey: true,
+            autoIncrement: true,
+            field: 'HorarioAtencionId'
+        },
+        agendaId: {
+            type: DataTypes.INTEGER,
+            allowNull: true,
+            references: {
+                model: 'Agenda',
+                key: 'AgendaId'
+            },
+            field: 'AgendaId'
+        },
+        dia: {
+            type: DataTypes.STRING,
+            allowNull: true,
+            field: 'Dia'
+        },
+        horaInicio: {
+            type: DataTypes.TIME,
+            allowNull: true,
+            field: 'HoraInicio'
+        },
+        horaFin: {
+            type: DataTypes.TIME,
+            allowNull: true,
+            field: 'HoraFin'
+        },
+        estadoHorario: {
+            type: DataTypes.BOOLEAN,
+            allowNull: true,
+            field: 'EstadoHorario'
         }
-    },
-    Dia: Sequelize.STRING,
-    HoraInicio: Sequelize.TIME,
-    HoraFin: Sequelize.TIME,
+    }, {
+        tableName: 'HorarioAtencion',
+        timestamps: false,
+        freezeTableName: true
+    });
 
-},
-{
-    timestamps: false,
-    freezeTableName: true
-});
+    // Prestador.associate = function (models) {
+    //     models.Prestador.hasMany(models.Agenda, {
+    //         foreignKey: 'PrestadorId',
+    //     });
+    // };
 
-module.exports = HorarioAtencion;
+    return HorarioAtencion;
+};
+

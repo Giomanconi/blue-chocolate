@@ -1,51 +1,68 @@
-const Sequelize = require('sequelize');
-const db = require('../config/database');
-const HorarioAtencion = require('./HorarioAtencion');
-const Prestador = require('./Prestador');
-const Paciente = require('./Paciente');
-const EstadoTurno = require('./EstadoTurno');
+'use strict';
 
-const Turno = db.define('Turno', {
-    TurnoId: {
-        type: Sequelize.INTEGER,
-        primaryKey: true,
-        autoIncrement: true,
-    },
-    HorarioAtencionId: {
-        type: Sequelize.INTEGER,
-        references: {
-            model: HorarioAtencion,
-            key: 'id'
+module.exports = (sequelize, DataTypes) => {
+    const Turno = sequelize.define('Turno', {
+        turnoId: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            primaryKey: true,
+            autoIncrement: true,
+            field: 'TurnoId'
+        },
+        horarioAtencionId: {
+            type: DataTypes.INTEGER,
+            allowNull: true,
+            references: {
+                model: 'HorarioAtencion',
+                key: 'HorarioAtencionId'
+            },
+            field: 'HorarioAtencionId'
+        },
+        prestadorId: {
+            type: DataTypes.INTEGER,
+            allowNull: true,
+            field: 'PrestadorId'
+        },
+        pacienteId: {
+            type: DataTypes.INTEGER,
+            allowNull: true,
+            references: {
+                model: 'Paciente',
+                key: 'PacienteId'
+            },
+            field: 'PacienteId'
+        },
+        hora: {
+            type: DataTypes.TIME,
+            allowNull: true,
+            field: 'Hora'
+        },
+        fecha: {
+            type: DataTypes.DATEONLY,
+            allowNull: true,
+            field: 'Fecha'
+        },
+        estadoTurnoId: {
+            type: DataTypes.INTEGER,
+            allowNull: true,
+            references: {
+                model: 'EstadoTurno',
+                key: 'EstadoTurnoId'
+            },
+            field: 'EstadoTurnoId'
         }
-    },
-    PrestadorId: {
-        type: Sequelize.INTEGER,
-        references: {
-            model: Prestador,
-            key: 'id'
-        }
-    },
-    PacienteId: {
-        type: Sequelize.INTEGER,
-        references: {
-            model: Paciente,
-            key: 'id'
-        }
-    },
-    Hora: Sequelize.TIME,
-    Fecha: Sequelize.DATE,
-    EstadoTurnoId: {
-        type: Sequelize.INTEGER,
-        references: {
-            model: EstadoTurno,
-            key: 'id'
-        }
-    }
+    }, {
+        tableName: 'Turno',
+        timestamps: false,
+        freezeTableName: true
+    });
 
-},
-{
-    timestamps: false,
-    freezeTableName: true
-});
+    // Prestador.associate = function (models) {
+    //     models.Prestador.hasMany(models.Agenda, {
+    //         foreignKey: 'PrestadorId',
+    //     });
+    // };
 
-module.exports = Turno;
+    return Turno;
+
+};

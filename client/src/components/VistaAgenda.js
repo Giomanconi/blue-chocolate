@@ -13,13 +13,13 @@ export default function DetalleAgenda() {
     let mappedItems = [];
 
     async function getAgendas() {
-        // try {
-        //     const res = await Axios.get('/agenda');
-        //     setDbAgendas(res.data)
-        //     // console.log(res.data)
-        // } catch (e) {
-        //     console.error("123" + e);
-        // }
+        try {
+            const res = await Axios.get('/agenda');
+            setDbAgendas(res.data)
+            // console.log(res.data)
+        } catch (e) {
+            console.error("123" + e);
+        }
     }
 
     useEffect(() => {
@@ -27,7 +27,7 @@ export default function DetalleAgenda() {
     }, []);
 
     if (dbAgendas) {
-        mappedItems = dbAgendas.map(p => <ItemAgenda key={p.PacienteId} {...p} />);
+        mappedItems = dbAgendas.map(p => <ItemAgenda key={p.AgendaId} {...p} />);
     }
 
 
@@ -67,9 +67,21 @@ export default function DetalleAgenda() {
                     </div>
                 </div>
                 <div className="container-fluid border AgendaList">
+                    <div className="row border-bottom border-danger align-items-center py-2" >
+                        <div className="col">
+                            Prestadores
+                        </div>
+                        <div className="col">
+                            Fecha de inicio
+                        </div>
+                        <div className="col">
+                            {/* Fecha de fin */}
+                        </div>
+                    </div>
                     {isAgendaEmpty()}
                 </div>
             </div>
         </>
     );
 }
+

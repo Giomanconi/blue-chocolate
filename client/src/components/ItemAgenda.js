@@ -5,26 +5,25 @@ import './ItemAgenda.css';
 export default function ItemAgenda(props) {
 
     let array = [];
-    
     const item = () => {
-        if (props.Descripcion) {
+        if (props.RazonSocial) {
             array.push(
-                <div key={props.PacienteId} className="col">
-                    {props.Descripcion}
+                <div key={"rz" + props.AgendaId} className="col">
+                    {props.RazonSocial}
                 </div>
             );
         }
-        if (props.Especialidad) {
+        if (props.FechaInicio) {
             array.push(
-                <div key={props.PacienteId * 2} className="col">
-                    {props.Especialidad}
+                <div key={"fi" + props.AgendaId} className="col">
+                    {props.FechaInicio}
                 </div>
             );
         }
-        if (props.Especialidad) {
+        if (props.Activo) {
             array.push(
-                <div key={props.PacienteId * 3} className="col">
-                    {props.SegundaEspecialidad}
+                <div key={"a" + props.AgendaId} className="col">
+                    Activa
                 </div>
             );
         }
@@ -32,8 +31,8 @@ export default function ItemAgenda(props) {
     }
 
     return (
-        <div className="row border-bottom border-danger align-items-center py-2" >
-            { item() }
+        <div className="row border-bottom border-primary align-items-center py-2" >
+            {item()}
         </div>
     );
 }

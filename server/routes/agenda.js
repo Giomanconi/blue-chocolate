@@ -12,28 +12,77 @@ router.get('/', async function (req, res) {
                 type: QueryTypes.SELECT
             }
         );
-        
         res.status(200).send(prestador)
-
     } catch (e) {
         console.log('Error getting agendas: ' + e)
     }
 });
 
+
 // Add new agenda
 router.post('/add', async function (req, res) {
-    let { fechaInicio, tiempoTurno, sobreturno, prestadorId } = await req.body;
-    console.log("======================== Agenda Add ===============================")
-    // let errors = [];
-    const newAgenda = await models.Agenda.create({
+    let {
         fechaInicio,
         tiempoTurno,
         sobreturno,
         prestadorId,
-        activo: 1
-    })
-    res.send(newAgenda)
-    console.log("======================== Agenda Add ===============================")
+        horarios } = req.body
+    // let errors = [];
+
+    //Set transaction to T
+    const t = await models.sequelize.transaction();
+
+    try {
+        //Insert Agenda to db
+        const newAgenda = await models.Agenda.create({
+            fechaInicio,
+            tiempoTurno,
+            sobreturno,
+            prestadorId,
+            activo: 1,
+        },
+            {
+                transaction: t
+            });
+
+        //Add agenda id key to horarios array
+        horarios.forEach(p => {
+            p.agendaId = newAgenda.agendaId
+        },
+            {
+                transaction: t
+            });
+
+        //insert horarios array to db
+        await models.HorarioAtencion.bulkCreate(
+            horarios,
+            {
+                transaction: t
+            });
+
+        //Commit Transaction
+        await t.commit();
+
+        //Send Response
+        res.send(newAgenda).status(200);
+
+    } catch (e) {
+        //revert transaction
+        await t.rollback();
+    }
+
+    // models.Agenda.findOne({ where: { prestadorId: prestadorId } })
+    //     .then(user => {
+    //         if (user) {
+    //             console.log('Usuario encontrado:', user);
+    //         } else {
+    //             throw new Error("No existe el Usuario");
+    //         }
+    //     })
+    //     .catch(error => {
+    //         console.log("Error:", error);
+    //     });
+
 });
 
 module.exports = router;

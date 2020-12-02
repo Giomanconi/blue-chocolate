@@ -1,6 +1,4 @@
 import React from 'react';
-import './ItemAgenda.css';
-
 
 export default function ItemAgenda(props) {
 
@@ -24,6 +22,27 @@ export default function ItemAgenda(props) {
             array.push(
                 <div key={"a" + props.AgendaId} className="col">
                     Activa
+                </div>
+            );
+        }
+        if (props.Dia) {
+            array.push(
+                <div key={"a" + props.AgendaId} className="col">
+                    Dia
+                </div>
+            );
+        }
+        if (props.HoraInicio) {
+            array.push(
+                <div key={"a" + props.AgendaId} className="col">
+                    Desde
+                </div>
+            );
+        }
+        if (props.HoraFin) {
+            array.push(
+                <div key={"a" + props.AgendaId} className="col">
+                    Hasta
                 </div>
             );
         }

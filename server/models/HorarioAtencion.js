@@ -44,11 +44,14 @@ module.exports = (sequelize, DataTypes) => {
         freezeTableName: true
     });
 
-    // Prestador.associate = function (models) {
-    //     models.Prestador.hasMany(models.Agenda, {
-    //         foreignKey: 'PrestadorId',
-    //     });
-    // };
+    HorarioAtencion.associate = function (models) {
+        models.HorarioAtencion.belongsTo(models.Agenda, {
+            as: 'horarios'
+            // foreignKey: 'AgendaId',
+        });
+
+    };
+
 
     return HorarioAtencion;
 };

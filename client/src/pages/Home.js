@@ -1,15 +1,20 @@
 import React from 'react';
-import Agenda from './Agenda';
+import { Link } from 'react-router-dom';
 
 
 export default function Home() {
     return (
         <>
-           <section className="container">
+            <section className="container">
+                <Link to="/agenda">
+                    <button className="btn btn-primary m-3 p-3"> AGENDA </button>
+                </Link>
 
-            <Agenda />
+                <Link to="/nuevaagenda">
+                    <button className="btn btn-primary m-3 p-3"> NUEVA AGENDA </button>
+                </Link>
 
-           </section>
+            </section >
         </>
     );
 }

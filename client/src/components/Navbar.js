@@ -1,12 +1,23 @@
 import React from 'react';
+import {
+    NavLink,
+    Link
+} from 'react-router-dom';
 
 export default function Navbar() {
     return (
         <>
             <nav className="navbar navbar-expand-lg navbar-dark bg-info">
                 <div className="container">
-                    <a className="navbar-brand" href="#top">Home</a>
-                    <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
+                    <NavLink to="/" className="navbar-brand">Home</NavLink>
+                    <button
+                        className="navbar-toggler"
+                        type="button"
+                        data-toggle="collapse"
+                        data-target="#navbarColor03"
+                        aria-controls="navbarColor03"
+                        aria-expanded="false"
+                        aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
                     </button>
 
@@ -20,7 +31,7 @@ export default function Navbar() {
                                     Herramientas
                                 </a>
                                 <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                    <a className="dropdown-item" href="#top">Nueva Agenda</a>
+                                    <Link className="dropdown-item" to="/nuevaagenda">Nueva Agenda</Link>
                                     <div className="dropdown-divider"></div>
                                     <a className="dropdown-item" href="#top">Cambiar Horarios de Atencion</a>
                                 </div>

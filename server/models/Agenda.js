@@ -49,12 +49,12 @@ module.exports = (sequelize, DataTypes) => {
         freezeTableName: true
     });
 
-    Agenda.asociate = function (model) {
-        model.Agenda.belongsTo(model.Prestador, {
-            foreignKey: 'PrestadorId'
-        });
-        model.Agenda.hasMany(model.HorarioAtencion, {
+    Agenda.associate = (models) => {
+        Agenda.hasMany(models.HorarioAtencion, {
             foreignKey: 'AgendaId'
+        });
+        Agenda.belongsTo(models.Prestador, {
+            foreignKey: 'PrestadorId'
         });
     };
 

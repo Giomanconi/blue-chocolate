@@ -9,10 +9,18 @@
   },
   "license": "MIT",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "server": "cd server && npm start",
+    "server-install": "cd server && npm install",
+    "client": "cd client && npm start",
+    "client-install": "cd client && npm install",
+    "start": "concurrently \"npm run server\" \"npm run client\"",
+    "dev-install": "concurrently \"npm run server-install\" \"npm run client-install\""
   },
   "bugs": {
     "url": "https://github.com/Giomanconi/blue-chocolate/issues"
   },
-  "homepage": "https://github.com/Giomanconi/blue-chocolate#readme"
+  "homepage": "https://github.com/Giomanconi/blue-chocolate#readme",
+  "dependencies": {
+    "concurrently": "^5.1.0"
+  }
 }

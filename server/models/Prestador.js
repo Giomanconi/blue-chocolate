@@ -1,14 +1,31 @@
-const Sequelize = require('sequelize');
-const db = require('../config/database');
+'use strict';
 
-const Prestador = db.define('Prestador', {
-    PrestadorId: {
-        type: Sequelize.INTEGER,
-        primaryKey: true,
-        autoIncrement: true,
-    },
-    RazonSocial: Sequelize.STRING
+module.exports = (sequelize, DataTypes) => {
+    var Prestador = sequelize.define('Prestador', {
+        prestadorId: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            primaryKey: true,
+            autoIncrement: true,
+            field: 'PrestadorId'
+        },
+        razonSocial: {
+            type: DataTypes.STRING,
+            allowNull: true,
+            field: 'RazonSocial'
+        }
+    }, {
+        tableName: 'Prestador',
+        timestamps: false,
+        freezeTableName: true
+    });
 
-});
+    Prestador.associate = function (models) {
+        models.Prestador.hasMany(models.Agenda, {
+            foreignKey: 'PrestadorId',
+        });
+    };
 
-module.exports = Prestador;
+
+    return Prestador;
+};

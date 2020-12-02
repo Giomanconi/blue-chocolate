@@ -1,21 +1,29 @@
 const express = require('express');
-const db = require('./config/database');
-const PORT = process.env.PORT || 8080;
+const path = require('path');
+const bodyParser = require('body-parser')
 const app = express();
 
-/*Test DB*/
-db.authenticate()
-	.then(() => console.log('Database connected...'))
-	.catch(err => console.log('Error: ' + err));
-/*********/
+//Body parser
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
+//Use Path
+app.use(express.static(path.join(__dirname, 'public')));
+
+//Index route
 app.get('/', (req, res) => res.send('INDEX'));
 
+//Defining routes
+var agendaRoute = require('./routes/agenda')
+var horarioRoute = require('./routes/horarioAtencion')
+var turnoRoute = require('./routes/turno')
+var prestadorRoute = require('./routes/prestador')
 
-//Agenda Routes
-app.use('/agendas', require('./routes/agenda'));
+//Using Routes
+app.use('/agenda', agendaRoute);
+app.use('/horario', horarioRoute);
+app.use('/turno', turnoRoute);
+app.use('/prestador', prestadorRoute);
 
 
-app.listen(PORT, function () {
-	console.log(`Server listening on port ${PORT}...`);
-});
+module.exports = app;
